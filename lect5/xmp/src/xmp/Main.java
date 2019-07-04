@@ -1,8 +1,24 @@
+
 package xmp;
 
 import java.util.Arrays;
 
+
 public class Main {
+
+/*
+	public static void main(String []args) {
+		int i;
+		DoubleArray da = new DoubleArray(10);
+		for(i=0 ; i < 10 ; i++) {
+			da.set(i, i);
+		}
+		System.out.println("\n"+da.max(new Maxsinus()));
+	}
+
+	
+*/
+
 
 	public static void main(String[] args) {
 
@@ -14,4 +30,5 @@ public class Main {
         System.out.println(Arrays.toString(a));
 	}
 
+	
 }
