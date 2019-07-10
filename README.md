@@ -1,1 +1,1 @@
-# java_lecturesTraining
+# java_BasicsTraining
