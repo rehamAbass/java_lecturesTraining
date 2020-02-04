@@ -1,0 +1,66 @@
+ public class Hello {
+
+	    private int counter = 0;
+	 
+	    private synchronized void addToCounter(int amount) {
+	        counter += amount;
+	    }
+	 ///////////////////////////////////////////////////////////////////
+	    private class B implements Runnable {
+	        private int from, to;
+	 
+	        private B(int from, int to) {
+	            this.from = from;
+	            this.to = to;
+	        }
+	 
+	        private boolean isPrime(int n) {
+	            int bound = (int) Math.sqrt(n);
+	            for (int i = 2; i <= bound; i++)
+	                if (n % i == 0)
+	                    return false;
+	            return true;
+	        }
+	 
+	        public void run() {
+	            int count = 0;
+	            System.out.println(Thread.currentThread().getName()+"  range :  from "+from+", to "+to);
+	            for (int x = from; x < to; x++) {
+	                if (isPrime(x)) {
+	                    count++;
+	                    System.out.println(Thread.currentThread().getName()+"\t"+x+" is prime");
+	                }
+	            }
+	            addToCounter(count);
+	        }
+	    }
+	 ///////////////////////////////////////////////////////////////////
+	    public void Primes(int n, int numThreads) {
+	        Thread[] ts = new Thread[numThreads];
+	        
+	        for (int i = 0; i < numThreads; i++) {
+	            int length = n /  numThreads;
+	            int from = Math.max(2, length * i);
+	            int to = length * (i + 1); 
+	            		if(i == numThreads - 1) {
+	            			to= n;
+	            		}
+	            ts[i] = new Thread(new B(from, to));
+	            ts[i].start();
+	        }
+	        for (Thread t : ts)
+	            try {
+	                t.join();
+	           } catch (InterruptedException e) {}  
+	    }
+	 //////////////////////////////////////////////////
+	    public static void main(String[] args) {
+
+	            Hello a = new Hello();
+	            int n =9;
+	            int threads =5;
+	            a.Primes(n, threads);
+	            System.out.format(" number of primes 1- %d = %d %n",n,a.counter);
+	        
+	    }
+ }
